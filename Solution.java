@@ -24,7 +24,7 @@ public class Solution {
 
                 BigInteger y = new BigInteger(value, Integer.parseInt(base));
                 yValues.put(x, y);
-                System.out.println("x = " + x + ", y = " + y + " (base " + base + ")");
+//                System.out.println("x = " + x + ", y = " + y + " (base " + base + ")");
             }
         }
 

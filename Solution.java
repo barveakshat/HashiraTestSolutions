@@ -2,17 +2,18 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.FileReader;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args) throws Exception {
         JSONObject json = new JSONObject(new JSONTokener(new FileReader("input.json")));
         JSONObject keys = json.getJSONObject("keys");
         int n = keys.getInt("n");
         int k = keys.getInt("k");
 
-        Map<Integer, Integer> yValues = new HashMap<>();
+        Map<Integer, BigInteger> yValues = new HashMap<>();
         for (Object keyObj : json.keySet()) {
             String key = (String) keyObj;
             if (!key.equals("keys")) {
@@ -21,18 +22,16 @@ public class Solution {
                 String base = root.getString("base");
                 String value = root.getString("value");
 
-                int y = Integer.parseInt(value, Integer.parseInt(base));
+                BigInteger y = new BigInteger(value, Integer.parseInt(base));
                 yValues.put(x, y);
                 System.out.println("x = " + x + ", y = " + y + " (base " + base + ")");
             }
         }
 
-
-        int c = 0;
-        for (int val : yValues.values()) {
-            c += val;
+        BigInteger c = BigInteger.ZERO;
+        for (BigInteger val : yValues.values()) {
+            c = c.add(val);
         }
         System.out.println("Secret c is : " + c);
-
     }
 }
